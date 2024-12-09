@@ -1,0 +1,21 @@
+body {
+  background-color: rgb(17, 17, 101);
+}
+
+#graph {
+  background-color: white;
+  width: 50%;
+  height: auto;
+  box-shadow: 3px;
+  border-radius: 1%;
+  padding: 10px;
+}
+
+rect {
+  fill: blue;
+  pointer-events: all;
+}
+
+rect:hover {
+  fill: white;
+}
