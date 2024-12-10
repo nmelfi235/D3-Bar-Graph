@@ -35,7 +35,10 @@ d3.json(
     .scaleTime()
     .domain([new Date(d3.min(dates)), new Date(d3.max(dates))])
     .range([0, width]);
-  const GDPScale = d3.scaleLinear().domain([0, d3.max(GDPvalues)]).range([0, height]);
+  const GDPScale = d3
+    .scaleLinear()
+    .domain([0, d3.max(GDPvalues)])
+    .range([0, height]);
   const yScale = d3
     .scaleLinear()
     .domain([0, d3.max(GDPvalues)])
@@ -43,7 +46,7 @@ d3.json(
 
   const scaledDates = dates.map((d) => xScale(d));
   const fixedGDPvalues = GDPvalues.map((d) => GDPScale(d));
-  const scaledGDPvalues = fixedGDPvalues.map((d) => yScale(d));
+  const scaledGDPvalues = GDPvalues.map((d) => yScale(d));
 
   // Draw x and y axes
   const xAxis = d3.axisBottom().scale(xScale);
@@ -75,8 +78,8 @@ d3.json(
   bars
     .transition()
     .duration((d, i) => i * 10)
-    .attr("y", (d) => height - d)
-    .attr("height", (d) => d);
+    .attr("y", (d, i) => height - fixedGDPvalues[i])
+    .attr("height", (d, i) => fixedGDPvalues[i]);
 
   bars
     .on("mouseover", function (event) {
