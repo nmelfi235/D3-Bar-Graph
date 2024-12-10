@@ -35,13 +35,15 @@ d3.json(
     .scaleTime()
     .domain([new Date(d3.min(dates)), new Date(d3.max(dates))])
     .range([0, width]);
+  const GDPScale = d3.scaleLinear().domain([0, d3.max(GDPvalues)]).range([0, height]);
   const yScale = d3
     .scaleLinear()
     .domain([0, d3.max(GDPvalues)])
     .range([height, 0]);
 
   const scaledDates = dates.map((d) => xScale(d));
-  const scaledGDPvalues = GDPvalues.map((d) => yScale(d));
+  const fixedGDPvalues = GDPvalues.map((d) => GDPScale(d));
+  const scaledGDPvalues = fixedGDPvalues.map((d) => yScale(d));
 
   // Draw x and y axes
   const xAxis = d3.axisBottom().scale(xScale);
