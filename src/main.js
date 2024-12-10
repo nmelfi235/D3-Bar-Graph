@@ -38,7 +38,7 @@ d3.json(
   const yScale = d3
     .scaleLinear()
     .domain([0, d3.max(GDPvalues)])
-    .range([0, height]);
+    .range([height, 0]);
 
   const scaledDates = dates.map((d) => xScale(d));
   const scaledGDPvalues = GDPvalues.map((d) => yScale(d));
