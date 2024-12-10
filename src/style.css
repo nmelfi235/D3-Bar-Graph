@@ -2,10 +2,27 @@ body {
   background-color: rgb(17, 17, 101);
 }
 
+#title {
+  color: white;
+  text-decoration: underline;
+}
+
+#github-logo {
+  color: white;
+  padding-left: 15px;
+}
+
+#tooltip {
+  background-color: black;
+  color: white;
+  font-weight: bold;
+  border-radius: 3%;
+}
+
 #graph {
   background-color: white;
-  width: 50%;
-  height: auto;
+  width: 800px;
+  height: 400px;
   box-shadow: 3px;
   border-radius: 1%;
   padding: 10px;

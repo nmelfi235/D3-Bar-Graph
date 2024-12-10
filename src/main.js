@@ -11,13 +11,13 @@ const tooltip = d3
   .select("#graph")
   .append("div")
   .attr("id", "tooltip")
-  .style("opacity", 0);
+  .style("opacity", 0)
+  .style("position", "absolute");
 
 // Get data
 d3.json(
   "https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json"
 ).then((data) => {
-  console.log(data);
   // Create graph area
   const svg = d3
     .select("#graph")
@@ -79,17 +79,21 @@ d3.json(
   bars
     .on("mouseover", function (event) {
       // Tooltip already exists so we just have to move it and make it visible
-      const i = this.getAttribute("index");
+      const i = d3.select(this).attr("index");
 
       tooltip
         .attr("data-date", rawDates[i])
         .attr("data-gdp", GDPvalues[i])
+        .style("top", event.pageY + 10 + "px")
+        .style("left", event.pageX + 10 + "px")
         .transition()
         .duration(200)
         .style("opacity", 0.9);
-      tooltip.html("Date: " + dates[i] + "<br>GDP: " + GDPvalues[i]);
+      tooltip.html(
+        "Date: " + dates[i] + "<br>GDP: $" + GDPvalues[i] + " billion"
+      );
     })
-    .on("mouseout", (e, d) => {
+    .on("mouseout", (event) => {
       tooltip.transition().duration(200).style("opacity", 0);
     });
 });
